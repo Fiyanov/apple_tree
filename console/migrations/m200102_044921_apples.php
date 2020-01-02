@@ -14,9 +14,9 @@ class m200102_044921_apples extends Migration
     {
         $this->createTable('apples', [
             'id' => $this->primaryKey(),
-            'color' => "ENUM('green', 'yellow', 'red') NOT NULL",
+            'color' => "ENUM('green', 'yellow', 'red', 'brown') NOT NULL",
             'status' => "ENUM('hanging', 'fallen', 'tainted') NOT NULL",
-            'intact_percent' => $this->decimal(2, 1),
+            'size' => $this->decimal(2, 2),
             'create_date' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
             'fall_date' => $this->timestamp()->defaultValue(null)
         ]);
@@ -26,7 +26,7 @@ class m200102_044921_apples extends Migration
 
         $this->addCommentOnColumn('apples', 'color', 'Цвет яблока');
         $this->addCommentOnColumn('apples', 'status', 'Статус яблока');
-        $this->addCommentOnColumn('apples', 'intact_percent', 'Остаток яблока в процентах');
+        $this->addCommentOnColumn('apples', 'size', 'Остаток яблока в процентах');
         $this->addCommentOnColumn('apples', 'create_date', 'Дата создания');
         $this->addCommentOnColumn('apples', 'fall_date', 'Дата падения');
     }
