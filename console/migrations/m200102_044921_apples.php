@@ -14,8 +14,8 @@ class m200102_044921_apples extends Migration
     {
         $this->createTable('apples', [
             'id' => $this->primaryKey(),
-            'color' => "ENUM('green', 'yellow', 'red', 'brown') NOT NULL",
-            'status' => "ENUM('hanging', 'fallen', 'tainted') NOT NULL",
+            'color' => $this->integer()->notNull(),
+            'status' => $this->integer()->notNull(),
             'size' => $this->decimal(2, 2),
             'create_date' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
             'fall_date' => $this->timestamp()->defaultValue(null)
