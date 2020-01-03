@@ -14,22 +14,22 @@ class m200103_144502_apple_colors extends Migration
     {
         $this->createTable('apple_colors', [
             'id' => $this->primaryKey(),
-            'color' => $this->string()->notNull()
+            'name' => $this->string()->notNull()
         ]);
 
         $this->insert('apple_colors', [
-            'color' => 'green'
+            'name' => 'green'
         ]);
 
         $this->insert('apple_colors', [
-            'color' => 'yellow'
+            'name' => 'yellow'
         ]);
 
         $this->insert('apple_colors', [
-            'color' => 'red'
+            'name' => 'red'
         ]);
 
-        $this->addCommentOnColumn('apple_colors', 'color', 'Цвет');
+        $this->addCommentOnColumn('apple_colors', 'name', 'Название цвета');
     }
 
     /**

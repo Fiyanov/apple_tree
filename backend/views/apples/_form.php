@@ -12,11 +12,11 @@ use yii\bootstrap\ActiveForm;
 
 <?php $form = ActiveForm::begin();?>
 
-<?=$form->field($model, 'color')->dropDownList($colors);?>
+<?=$form->field($model, 'color_id')->dropDownList($colors);?>
 
 <?=$form->field($model, 'size')->input('number', ['min' => 0.1, 'max' => 1, 'step' => 0.1, 'value' => 1.0])?>
 
-<?=$form->field($model, 'status')->dropDownList($statuses)?>
+<?=$form->field($model, 'status_id')->dropDownList($statuses)?>
 
 <div class="form-group">
     <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

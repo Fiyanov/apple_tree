@@ -14,18 +14,18 @@ class m200102_044921_apples extends Migration
     {
         $this->createTable('apples', [
             'id' => $this->primaryKey(),
-            'color' => $this->integer()->notNull(),
-            'status' => $this->integer()->notNull(),
-            'size' => $this->decimal(2, 2),
+            'color_id' => $this->integer()->notNull(),
+            'status_id' => $this->integer()->notNull(),
+            'size' => $this->decimal(3, 2)->defaultValue(1),
             'create_date' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
             'fall_date' => $this->timestamp()->defaultValue(null)
         ]);
 
-        $this->createIndex('apple_color', 'apples', 'color');
-        $this->createIndex('apple_status', 'apples', 'status');
+        $this->createIndex('apple_color', 'apples', 'color_id');
+        $this->createIndex('apple_status', 'apples', 'status_id');
 
-        $this->addCommentOnColumn('apples', 'color', 'Цвет яблока');
-        $this->addCommentOnColumn('apples', 'status', 'Статус яблока');
+        $this->addCommentOnColumn('apples', 'color_id', 'Цвет яблока');
+        $this->addCommentOnColumn('apples', 'status_id', 'Статус яблока');
         $this->addCommentOnColumn('apples', 'size', 'Остаток яблока в процентах');
         $this->addCommentOnColumn('apples', 'create_date', 'Дата создания');
         $this->addCommentOnColumn('apples', 'fall_date', 'Дата падения');

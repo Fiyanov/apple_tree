@@ -14,22 +14,22 @@ class m200103_144609_apple_statuses extends Migration
     {
         $this->createTable('apple_statuses', [
             'id' => $this->primaryKey(),
-            'status' => $this->string()->notNull()
+            'name' => $this->string()->notNull()
         ]);
 
         $this->insert('apple_statuses', [
-            'status' => 'hanging'
+            'name' => 'hanging'
         ]);
 
         $this->insert('apple_statuses', [
-            'status' => 'fallen'
+            'name' => 'fallen'
         ]);
 
         $this->insert('apple_statuses', [
-            'status' => 'tainted'
+            'name' => 'tainted'
         ]);
 
-        $this->addCommentOnColumn('apple_statuses', 'status', 'Статус');
+        $this->addCommentOnColumn('apple_statuses', 'name', 'Название статуса');
     }
 
     /**

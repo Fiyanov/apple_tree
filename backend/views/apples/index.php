@@ -16,5 +16,18 @@ use yii\bootstrap\Html;
     <?=GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            'id',
+            [
+                'attribute' => 'color_id',
+                'value' => 'color.name'
+            ],
+            [
+                'attribute' => 'status_id',
+                'value' => 'status.name'
+            ],
+            'size'
+        ]
     ])?>
 </p>

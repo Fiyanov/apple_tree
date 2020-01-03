@@ -34,8 +34,8 @@ class Apples extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['color', 'status'], 'required'],
-            [['color', 'status'], 'integer'],
+            [['color_id', 'status_id'], 'required'],
+            [['color_id', 'status_id'], 'integer'],
             [['size'], 'number'],
             [['create_date', 'fall_date'], 'safe'],
         ];
@@ -48,8 +48,8 @@ class Apples extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'color' => 'Цвет яблока',
-            'status' => 'Статус яблока',
+            'color_id' => 'Цвет яблока',
+            'status_id' => 'Статус яблока',
             'size' => 'Остаток яблока в процентах',
             'create_date' => 'Дата создания',
             'fall_date' => 'Дата падения',
@@ -58,12 +58,12 @@ class Apples extends \yii\db\ActiveRecord
 
     public function getColor()
     {
-        return $this->hasOne(AppleColors::class, ['id', 'color']);
+        return $this->hasOne(AppleColors::className(), ['id' => 'color_id']);
     }
 
     public function getStatus()
     {
-        return $this->hasOne(AppleStatuses::class, ['id', 'status']);
+        return $this->hasOne(AppleStatuses::className(), ['id' => 'status_id']);
     }
 
     /**

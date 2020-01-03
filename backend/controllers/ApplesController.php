@@ -32,8 +32,8 @@ class ApplesController extends \yii\web\Controller
             $this->redirect(Url::toRoute('apples/index'));
         }
 
-        $colors = AppleColors::find()->select(['color'])->indexBy('id')->asArray()->column();
-        $statuses = AppleStatuses::find()->select(['status'])->indexBy('id')->asArray()->column();
+        $colors = AppleColors::find()->select(['name'])->indexBy('id')->asArray()->column();
+        $statuses = AppleStatuses::find()->select(['name'])->indexBy('id')->asArray()->column();
 
         return $this->render('add', [
             'form' => $this->render('_form', [
