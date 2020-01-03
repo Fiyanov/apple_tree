@@ -16,19 +16,9 @@ use Yii;
  */
 class Apples extends \yii\db\ActiveRecord
 {
-    const COLOR_GREEN = 'green';
-    const COLOR_YELLOW = 'yellow';
-    const COLOR_RED = 'red';
-
     const STATUS_HANGING = 'hanging';
     const STATUS_FALLEN = 'fallen';
     const STATUS_TAINTED = 'tainted';
-
-    public function __construct($color = self::COLOR_GREEN)
-    {
-        $color = $color ? $color : self::COLOR_GREEN;
-        $this->color = $color;
-    }
 
     /**
      * {@inheritdoc}
@@ -45,7 +35,7 @@ class Apples extends \yii\db\ActiveRecord
     {
         return [
             [['color', 'status'], 'required'],
-            [['color', 'status'], 'string'],
+            [['color', 'status'], 'integer'],
             [['size'], 'number'],
             [['create_date', 'fall_date'], 'safe'],
         ];
@@ -64,6 +54,16 @@ class Apples extends \yii\db\ActiveRecord
             'create_date' => 'Дата создания',
             'fall_date' => 'Дата падения',
         ];
+    }
+
+    public function getColor()
+    {
+        return $this->hasOne(AppleColors::class, ['id', 'color']);
+    }
+
+    public function getStatus()
+    {
+        return $this->hasOne(AppleStatuses::class, ['id', 'status']);
     }
 
     /**
