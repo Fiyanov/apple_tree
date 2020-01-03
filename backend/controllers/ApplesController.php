@@ -3,7 +3,10 @@
 namespace backend\controllers;
 
 use Yii;
+use yii\helpers\Url;
 use common\models\Apples;
+use common\models\AppleColors;
+use common\models\AppleStatuses;
 use common\models\search\ApplesSearch;
 
 class ApplesController extends \yii\web\Controller
@@ -21,13 +24,24 @@ class ApplesController extends \yii\web\Controller
 
     public function actionAdd()
     {
-        if (Yii::$app->request->isPost) {
-            $model = new Apples();
+        $model = new Apples();
 
+        if (Yii::$app->request->isPost) {
             $model->load(Yii::$app->request->post());
             $model->save();
-            $this->redirect('/apples/index');
+            $this->redirect(Url::toRoute('apples/index'));
         }
+
+        $colors = AppleColors::find()->select(['color'])->indexBy('id')->asArray()->column();
+        $statuses = AppleStatuses::find()->select(['status'])->indexBy('id')->asArray()->column();
+
+        return $this->render('add', [
+            'form' => $this->render('_form', [
+                'model' => $model,
+                'colors' => $colors,
+                'statuses' => $statuses
+            ])
+        ]);
     }
 
     public function actionEdit($id)
@@ -35,8 +49,14 @@ class ApplesController extends \yii\web\Controller
         if ($model = Apples::findOne($id)) {
             $model->load(Yii::$app->request->post());
             $model->save();
-            $this->redirect('/apples/index');
+            $this->redirect(Url::toRoute('apples/index'));
         }
+
+        return $this->render('add', [
+            'form' => $this->render('_form', [
+                'model' => $model
+            ])
+        ]);
     }
 
     public function actionDelete($id)
@@ -46,10 +66,10 @@ class ApplesController extends \yii\web\Controller
             try {
                 $model->delete();
             } catch (\Exception $exception) {
-                $this->redirect('/apples/error');
+                $this->redirect(Url::toRoute('apples/error'));
             }
 
-            $this->redirect('/apples/index');
+            $this->redirect(Url::toRoute('apples/index'));
         }
     }
 }
