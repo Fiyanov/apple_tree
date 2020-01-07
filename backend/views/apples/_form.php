@@ -18,6 +18,10 @@ use yii\bootstrap\ActiveForm;
 
 <?=$form->field($model, 'status_id')->dropDownList($statuses)?>
 
+<?=$form->field($model, 'pos_x')->input('number', ['min' => 1, 'max' => 400, 'step' => 1, 'value' => rand(1, 400)])?>
+
+<?=$form->field($model, 'pos_y')->input('number', ['min' => 1, 'max' => 600, 'step' => 1, 'value' => rand(1, 600)])?>
+
 <div class="form-group">
     <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
 </div>

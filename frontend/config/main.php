@@ -45,5 +45,6 @@ return [
         ],
         */
     ],
+    'defaultRoute' => 'tree/index',
     'params' => $params,
 ];

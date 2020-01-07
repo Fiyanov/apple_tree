@@ -30,6 +30,8 @@ class AppleService
             'name' => self::STATUS_FALLEN
         ]);
 
+        $model->pos_x = rand(1, 400);
+        $model->pos_y = rand(1, 30);
         $model->status_id = $status->id;
         $model->fall_date = new Expression('NOW()');
         return $model->save();

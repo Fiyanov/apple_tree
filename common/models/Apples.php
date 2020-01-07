@@ -30,6 +30,7 @@ class Apples extends \yii\db\ActiveRecord
         return [
             [['color_id', 'status_id'], 'required'],
             [['color_id', 'status_id'], 'integer'],
+            [['pos_x', 'pos_y'], 'integer'],
             [['size'], 'number'],
             [['create_date', 'fall_date'], 'safe'],
         ];
@@ -47,6 +48,8 @@ class Apples extends \yii\db\ActiveRecord
             'size' => 'Остаток яблока в процентах',
             'create_date' => 'Дата создания',
             'fall_date' => 'Дата падения',
+            'pos_x' => 'Позиция X',
+            'pos_y' => 'Позиция Y'
         ];
     }
 
