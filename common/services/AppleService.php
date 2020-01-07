@@ -6,7 +6,7 @@
  * Time: 18:33
  */
 
-namespace app\services;
+namespace common\services;
 
 use yii\db\Expression;
 use common\models\Apples;
@@ -55,6 +55,21 @@ class AppleService
         return $model->save();
     }
 
+    public function updateFallenApples()
+    {
+        $status = AppleStatuses::findOne([
+            'name' => self::STATUS_TAINTED
+        ]);
+
+        $apples = Apples::find()->where('fall_date < NOW() - INTERVAL 5 HOUR')->all();
+
+        /**@var $apple Apples*/
+        foreach ($apples as $apple) {
+            $apple->status_id = $status->id;
+            $apple->save();
+        }
+    }
+
     /**
      * это яблоко можно откусить?
      *
@@ -63,8 +78,7 @@ class AppleService
      */
     public function isEdible(Apples $model)
     {
-        //TODO: DateTime diff
-        return $model->status->name === self::STATUS_FALLEN and strtotime($model->fall_date) > (time() - 3600 * 5);
+        return $model->status->name === self::STATUS_FALLEN and $model->status->name !== self::STATUS_TAINTED;
     }
 
     /**
