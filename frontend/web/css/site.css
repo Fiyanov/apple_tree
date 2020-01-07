@@ -169,17 +169,17 @@ a.desc:after {
 
 .apple.green {
     background: rgb(59,121,21);
-    background: linear-gradient(0deg, rgba(59,121,21,1) 0%, rgba(97,195,34,1) 100%);
+    background: linear-gradient(0deg, rgb(50, 99, 19) 0%, rgba(97,195,34,1) 100%);
 }
 
 .apple.yellow {
     background: rgb(223, 202, 0);
-    background: linear-gradient(0deg, rgb(255, 148, 0) 0%, rgba(223, 202, 0,1) 100%);
+    background: linear-gradient(0deg, rgb(255, 101, 0) 0%, rgba(223, 202, 0,1) 100%);
 }
 
 .apple.red {
     background: rgb(223, 37, 0);
-    background: linear-gradient(0deg, rgb(161, 0, 17) 0%, rgb(223, 37, 0) 100%);
+    background: linear-gradient(0deg, rgb(152, 0, 16) 0%, rgb(255, 41, 0) 100%);
 }
 
 .apple.tainted {
