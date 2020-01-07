@@ -8,6 +8,7 @@ use common\models\Apples;
 use common\models\AppleColors;
 use common\models\AppleStatuses;
 use common\models\search\ApplesSearch;
+use app\services\AppleService;
 
 class ApplesController extends \yii\web\Controller
 {
@@ -71,5 +72,23 @@ class ApplesController extends \yii\web\Controller
 
             $this->redirect(Url::toRoute('apples/index'));
         }
+    }
+
+    public function actionDrop($id)
+    {
+        if ($apple = Apples::findOne($id)) {
+            (new AppleService())->fall($apple);
+        }
+
+        $this->redirect(Url::toRoute('apples/index'));
+    }
+
+    public function actionEat($id)
+    {
+        if ($apple = Apples::findOne($id)) {
+            (new AppleService())->bite($apple, 25);
+        }
+
+        $this->redirect(Url::toRoute('apples/index'));
     }
 }

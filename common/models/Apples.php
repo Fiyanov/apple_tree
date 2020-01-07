@@ -2,24 +2,18 @@
 
 namespace common\models;
 
-use Yii;
-
 /**
  * This is the model class for table "apples".
  *
  * @property int $id
- * @property string $color Цвет яблока
- * @property string $status Статус яблока
+ * @property string $color_id Цвет яблока
+ * @property string $status_id Статус яблока
  * @property float|null $size Остаток яблока в процентах
  * @property string|null $create_date Дата создания
  * @property string|null $fall_date Дата падения
  */
 class Apples extends \yii\db\ActiveRecord
 {
-    const STATUS_HANGING = 'hanging';
-    const STATUS_FALLEN = 'fallen';
-    const STATUS_TAINTED = 'tainted';
-
     /**
      * {@inheritdoc}
      */
@@ -66,46 +60,28 @@ class Apples extends \yii\db\ActiveRecord
         return $this->hasOne(AppleStatuses::className(), ['id' => 'status_id']);
     }
 
-    /**
-     * это яблоко можно откусить?
-     *
-     * @return bool
-     */
-    public function isEdible()
+    public function getDateCreateTimestamp()
     {
-        return $this->status === self::STATUS_FALLEN and $this->fall_date < 5;
+        return strtotime($this->create_date);
     }
 
-    /**
-     * это яблоко съедено?
-     *
-     * @return bool
-     */
-    public function isEmpty()
+    public function getDateFallTimestamp()
     {
-        return $this->size <= 0;
+        return strtotime($this->fall_date);
     }
 
-    /**
-     * Кусаем яблоко
-     *
-     * @param $bite_size
-     * @return bool
-     * @throws \Exception
-     */
-    public function bite($bite_size)
+    public function getFormattedDateCreate()
     {
-        if (!$this->isEdible()) {
-            throw new \Exception('Это яблочко нельзя скушать!');
-        }
-
-        $this->size -= $bite_size / 100;
-        return $this->save();
+        return date('d.m.Y H:m:i', $this->getDateCreateTimestamp());
     }
 
-    public function fall()
+    public function getFormattedDateFall()
     {
-        $this->status = self::STATUS_FALLEN;
-        return $this->save();
+        return $this->getDateFallTimestamp() ? date('d.m.Y H:m:i', $this->getDateFallTimestamp()) : false;
+    }
+
+    public function getDropTimeHours()
+    {
+        return $this->getDateFallTimestamp() ? round((time() - $this->getDateFallTimestamp()) / 3600, 1) : false;
     }
 }
